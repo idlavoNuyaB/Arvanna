@@ -24,15 +24,6 @@ public class MessageController {
         this.client = client;
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(MessageController.class);
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(MessageController.class, args);
-    }
-
     @EventMapping
     public void handle(MessageEvent<TextMessageContent> event) {
         String text = event.getMessage().getText().toLowerCase();
