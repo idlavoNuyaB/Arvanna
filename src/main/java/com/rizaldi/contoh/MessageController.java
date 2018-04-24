@@ -40,7 +40,7 @@ public class MessageController {
         if (pesanSplit[0].equals("apakah")) {
             String jawaban = getRandomJawaban();
             String replyToken = event.getReplyToken();
-
+            balasChat(replyToken,jawaban);
         }
     }
 
