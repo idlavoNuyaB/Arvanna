@@ -10,6 +10,8 @@ import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Random;
+
 @LineMessageHandler
 public class MessageController {
     private LineMessagingClient client;
@@ -32,7 +34,7 @@ public class MessageController {
 
     private String getRandomJawaban(){
         String jawaban="";
-        int random=new random().nextInt();
+        int random=new Random().nextInt();
         if(random%2==0){
             jawaban="Ya";
         }
@@ -48,5 +50,3 @@ public class MessageController {
         client.replyMessage(replyMessage);
     }
 }
-}
-g
