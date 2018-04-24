@@ -11,6 +11,7 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 @LineMessageHandler
 public class MessageController {
@@ -46,7 +47,12 @@ public class MessageController {
 
     private void balasChat(String replyToken,String jawaban) {
         TextMessage balasan=new TextMessage(jawaban);
-        ReplyMessage replyMessage=new ReplyMessage(replyToken,balasan);
-        client.replyMessage(replyMessage);
+        try {
+            client
+                    .replyMessage(new ReplyMessage(replyToken, balasan))
+                    .get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Ada error saat ingin membalas chat");
+        }
     }
 }
