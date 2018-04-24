@@ -9,6 +9,8 @@ import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -20,6 +22,15 @@ public class MessageController {
     @Autowired
     public MessageController(LineMessagingClient client) {
         this.client = client;
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MessageController.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(MessageController.class, args);
     }
 
     @EventMapping
